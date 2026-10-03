@@ -13,6 +13,7 @@ from .pacing_backend import PACING_BACKEND_NAME, CardiEPPacingBackend
 from .service import CardiTherapyService, ReadinessError
 
 __all__ = [
+    "PACING_BACKEND_NAME",
     "ArtifactRef",
     "CardiEPPacingBackend",
     "CardiTherapyService",
@@ -22,7 +23,6 @@ __all__ = [
     "InterventionPlan",
     "InterventionRunRequest",
     "InterventionRunResult",
-    "PACING_BACKEND_NAME",
     "ReadinessError",
 ]
 

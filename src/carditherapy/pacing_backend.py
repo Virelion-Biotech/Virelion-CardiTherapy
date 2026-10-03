@@ -76,7 +76,7 @@ class CardiEPPacingBackend:
             return True
         try:
             from cardiep import EPAPI  # noqa: F401
-        except Exception:
+        except (ImportError, ModuleNotFoundError):
             return False
         return True
 
@@ -115,7 +115,7 @@ class CardiEPPacingBackend:
     def _summary(result: dict[str, Any]) -> tuple[dict[str, float], ArtifactRef]:
         raw_outputs = result.get("outputs")
         if not isinstance(raw_outputs, list):
-            raise RuntimeError("CardiEP pacing result is missing outputs")
+            raise TypeError("CardiEP pacing result is missing outputs")
         summary = next(
             (
                 item
@@ -134,7 +134,7 @@ class CardiEPPacingBackend:
             raise RuntimeError("CardiEP pacing summary failed SHA-256 verification")
         payload = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(payload, dict):
-            raise RuntimeError("CardiEP pacing summary must be a JSON object")
+            raise TypeError("CardiEP pacing summary must be a JSON object")
 
         span = payload.get(
             "activation_span_ms",
@@ -210,15 +210,17 @@ class CardiEPPacingBackend:
             raise ValueError("settings.ep_parameters must be a non-empty object")
         units = request.settings.get("ep_parameter_units") or {}
         if not isinstance(units, dict):
-            raise ValueError("settings.ep_parameter_units must be an object")
+            raise TypeError("settings.ep_parameter_units must be an object")
         anatomy_ref = self._anatomy_ref(request)
         api = self._api()
 
         outcomes: list[InterventionOutcome] = []
         artifacts: list[ArtifactRef] = []
         warnings = [
-            "cardiep-pacing-v1 is a research simulation of activation-root changes; "
-            "it does not predict clinical pacing benefit."
+            (
+                "cardiep-pacing-v1 is a research simulation of activation-root changes; "
+                "it does not predict clinical pacing benefit."
+            )
         ]
         arm_provenance: list[dict[str, Any]] = []
         validation_statuses: list[str] = []

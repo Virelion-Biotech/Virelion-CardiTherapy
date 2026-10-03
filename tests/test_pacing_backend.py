@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from carditherapy import (
+    PACING_BACKEND_NAME,
     ArtifactRef,
     CardiEPPacingBackend,
     CardiTherapyService,
@@ -14,7 +15,6 @@ from carditherapy import (
     InterventionArm,
     InterventionPlan,
     InterventionRunRequest,
-    PACING_BACKEND_NAME,
 )
 
 
