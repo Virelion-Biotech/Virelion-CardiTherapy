@@ -52,7 +52,7 @@ class InterventionPlan(BaseModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
 
     @model_validator(mode="after")
-    def validate_plan(self) -> "InterventionPlan":
+    def validate_plan(self) -> InterventionPlan:
         if not self.arms:
             raise ValueError("At least one intervention arm is required")
         if not self.endpoints:
@@ -80,7 +80,7 @@ class InterventionOutcome(BaseModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
 
     @model_validator(mode="after")
-    def require_value_or_artifact(self) -> "InterventionOutcome":
+    def require_value_or_artifact(self) -> InterventionOutcome:
         if self.value is None and self.artifact_ref is None:
             raise ValueError("Outcome requires a scalar value or artifact reference")
         return self
