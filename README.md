@@ -15,7 +15,7 @@ CardiTherapy owns:
 - uncertainty links back to CardiInfer;
 - reproducible intervention manifests and provenance.
 
-CardiTherapy is **not** a clinical treatment recommender. It does not select therapy for a patient and does not fabricate efficacy when no validated backend exists.
+CardiTherapy is **not** a clinical treatment recommender. It does not select therapy for a patient and does not fabricate efficacy when no validated backend exists. The built-in `cardiep-pacing-v1` backend is deliberately narrow: it delegates pacing-root changes to CardiEP and reports activation-timing endpoints only.
 
 ## Quick start
 
@@ -32,3 +32,18 @@ A virtual intervention result is a model-dependent simulation. It is not evidenc
 ## License
 
 AGPL-3.0-or-later.
+
+
+## Built-in pacing backend
+
+`cardiep-pacing-v1` provides a real but deliberately narrow intervention path.
+It requires one EP anatomy artifact in `baseline_refs`, an explicit CardiEP
+backend and parameter set in request settings, and either a comparator arm or
+one pacing intervention per active arm. Pacing interventions may modify only
+activation-root settings such as `root_node`, `root_nodes`, and
+`root_activation_ms`.
+
+The only supported endpoints are `activation_span_ms`,
+`activation_min_ms`, and `activation_max_ms`. These are EP simulation
+outputs, not clinical outcomes. Ablation, pharmacologic, device efficacy,
+regenerative, surgical, and patient-benefit endpoints continue to fail closed.

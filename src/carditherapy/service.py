@@ -9,8 +9,19 @@ class ReadinessError(RuntimeError):
 
 
 class CardiTherapyService:
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        backends: list[TherapyBackend] | None = None,
+        *,
+        register_defaults: bool = True,
+    ) -> None:
         self._backends: dict[str, TherapyBackend] = {}
+        if register_defaults:
+            from .pacing_backend import CardiEPPacingBackend
+
+            self.register_backend(CardiEPPacingBackend())
+        for backend in backends or []:
+            self.register_backend(backend)
 
     def register_backend(self, backend: TherapyBackend) -> None:
         self._backends[backend.name] = backend
