@@ -47,7 +47,14 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _verify_local_ref(ref: ArtifactRef, *, label: str) -> str:
+def _verify_local_ref(ref: ArtifactRef, *, label: str) -> str | None:
+    parsed = urlparse(ref.uri)
+    if parsed.scheme not in {"", "file"}:
+        if ref.sha256 is not None:
+            raise RuntimeError(
+                f"{label} declares SHA-256 but cannot be verified from non-local URI {ref.uri!r}"
+            )
+        return None
     path = _local_path(ref.uri)
     if not path.is_file():
         raise FileNotFoundError(f"{label} artifact does not exist: {path}")
