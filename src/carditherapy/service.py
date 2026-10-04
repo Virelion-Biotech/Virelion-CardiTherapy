@@ -39,4 +39,26 @@ class CardiTherapyService:
         result = self._backend(request.backend).run(request)
         if result.subject_id != request.subject_id:
             raise ReadinessError("Backend returned intervention results for a different subject")
+        if result.backend != request.backend:
+            raise ReadinessError("Backend result identifier does not match request backend")
+
+        result.provenance.setdefault(
+            "twin_state_artifact_id", request.twin_state_ref.artifact_id
+        )
+        if request.twin_state_ref.sha256 is not None:
+            result.provenance.setdefault(
+                "twin_state_sha256", request.twin_state_ref.sha256
+            )
+        result.provenance.setdefault(
+            "baseline_artifact_ids",
+            [item.artifact_id for item in request.baseline_refs],
+        )
+        if request.posterior_ref is not None:
+            result.provenance.setdefault(
+                "posterior_artifact_id", request.posterior_ref.artifact_id
+            )
+            if request.posterior_ref.sha256 is not None:
+                result.provenance.setdefault(
+                    "posterior_sha256", request.posterior_ref.sha256
+                )
         return result
