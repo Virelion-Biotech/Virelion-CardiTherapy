@@ -149,3 +149,55 @@ def test_cardiep_pacing_backend_rejects_clinical_or_unsupported_endpoints(
     backend = CardiEPPacingBackend(api_factory=lambda: _FakeEPAPI(tmp_path))
     with pytest.raises(ValueError, match="activation timing endpoints"):
         backend.run(request)
+
+
+def test_cardiep_pacing_backend_verifies_twin_state_and_posterior_lineage(
+    tmp_path: Path,
+) -> None:
+    request = _request(tmp_path)
+    state = tmp_path / "state.json"
+    state.write_text('{"entity_id":"S1"}\n', encoding="utf-8")
+    state_sha = hashlib.sha256(state.read_bytes()).hexdigest()
+    posterior = tmp_path / "posterior.json"
+    posterior.write_text('{"samples":[]}\n', encoding="utf-8")
+    posterior_sha = hashlib.sha256(posterior.read_bytes()).hexdigest()
+
+    request.twin_state_ref = ArtifactRef(
+        artifact_id="state",
+        kind="cardiac_state",
+        uri=state.resolve().as_uri(),
+        sha256=state_sha,
+        metadata={"state_fingerprint": "fingerprint-1"},
+    )
+    request.posterior_ref = ArtifactRef(
+        artifact_id="posterior",
+        kind="posterior_samples",
+        uri=posterior.resolve().as_uri(),
+        sha256=posterior_sha,
+    )
+
+    result = CardiTherapyService(
+        backends=[CardiEPPacingBackend(api_factory=lambda: _FakeEPAPI(tmp_path))],
+        register_defaults=False,
+    ).run(request)
+
+    assert result.provenance["twin_state_artifact_id"] == "state"
+    assert result.provenance["twin_state_sha256"] == state_sha
+    assert result.provenance["twin_state_fingerprint"] == "fingerprint-1"
+    assert result.provenance["posterior_artifact_id"] == "posterior"
+    assert result.provenance["posterior_sha256"] == posterior_sha
+
+
+def test_cardiep_pacing_backend_rejects_claimed_hash_mismatch(tmp_path: Path) -> None:
+    request = _request(tmp_path)
+    state = tmp_path / "state.json"
+    state.write_text('{"entity_id":"S1"}\n', encoding="utf-8")
+    request.twin_state_ref = ArtifactRef(
+        artifact_id="state",
+        kind="cardiac_state",
+        uri=state.resolve().as_uri(),
+        sha256="0" * 64,
+    )
+    backend = CardiEPPacingBackend(api_factory=lambda: _FakeEPAPI(tmp_path))
+    with pytest.raises(RuntimeError, match="Twin state artifact failed SHA-256"):
+        backend.run(request)
