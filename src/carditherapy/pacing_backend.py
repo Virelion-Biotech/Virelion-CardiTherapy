@@ -47,6 +47,16 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _verify_local_ref(ref: ArtifactRef, *, label: str) -> str:
+    path = _local_path(ref.uri)
+    if not path.is_file():
+        raise FileNotFoundError(f"{label} artifact does not exist: {path}")
+    observed = _sha256(path)
+    if ref.sha256 is not None and observed.lower() != ref.sha256.lower():
+        raise RuntimeError(f"{label} artifact failed SHA-256 verification")
+    return observed
+
+
 class CardiEPPacingBackend:
     """Pacing intervention backend delegated to CardiEP.
 
@@ -212,6 +222,13 @@ class CardiEPPacingBackend:
         if not isinstance(units, dict):
             raise TypeError("settings.ep_parameter_units must be an object")
         anatomy_ref = self._anatomy_ref(request)
+        state_sha256 = _verify_local_ref(request.twin_state_ref, label="Twin state")
+        posterior_sha256 = None
+        if request.posterior_ref is not None:
+            posterior_sha256 = _verify_local_ref(
+                request.posterior_ref,
+                label="Posterior",
+            )
         api = self._api()
 
         outcomes: list[InterventionOutcome] = []
@@ -307,6 +324,17 @@ class CardiEPPacingBackend:
                 "engine": "Virelion-CardiTherapy",
                 "delegate_service": "Virelion-CardiEP",
                 "delegate_backend": ep_backend,
+                "twin_state_artifact_id": request.twin_state_ref.artifact_id,
+                "twin_state_sha256": state_sha256,
+                "twin_state_fingerprint": request.twin_state_ref.metadata.get(
+                    "state_fingerprint"
+                ),
+                "posterior_artifact_id": (
+                    None
+                    if request.posterior_ref is None
+                    else request.posterior_ref.artifact_id
+                ),
+                "posterior_sha256": posterior_sha256,
                 "arms": arm_provenance,
                 "scientific_status": (
                     "software-checked pacing activation experiment; "
