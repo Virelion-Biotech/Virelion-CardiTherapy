@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import math
+from importlib.metadata import distribution
 from pathlib import Path
 
 from .models import ArtifactRef, InterventionRunRequest
@@ -125,12 +126,28 @@ def run_cpu_validation(root: Path):
                         ],
                     }
                 )
+    import json
+
+    import cardiep
+
+    delegate_root = Path(cardiep.__file__).resolve().parent
+    direct_url_text = distribution("virelion-cardiep").read_text("direct_url.json")
+    vcs_info = json.loads(direct_url_text).get("vcs_info", {}) if direct_url_text else {}
+    installed_commit = vcs_info.get("commit_id")
+    if installed_commit is not None and installed_commit != CARDIEP_REVISION:
+        raise ValueError("Installed CardiEP revision differs from configured validation pin")
     return {
         "schema_version": "carditherapy-cpu-validation-v1",
         "computational_status": "passed" if all(item["passed"] for item in checks) else "failed",
         "fixture_status": "synthetic analytic geometry; no patient data",
         "independent_reference": "direct Euclidean edge distance / isotropic speed; triangle and tetrahedron are complete graphs",
-        "cardiep_revision": CARDIEP_REVISION,
+        "configured_cardiep_revision": CARDIEP_REVISION,
+        "installed_cardiep_vcs_commit": installed_commit,
+        "installed_cardiep_version": cardiep.__version__,
+        "delegate_source_sha256": {
+            path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in sorted(delegate_root.glob("*.py"))
+        },
         "checks": checks,
         "empirical_status": "not_validated",
         "limitations": [

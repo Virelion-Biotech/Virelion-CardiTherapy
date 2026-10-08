@@ -91,6 +91,9 @@ class CardiTherapyService:
             )
         ).hexdigest()
         result.provenance["therapy_request"] = snapshot
+        from . import __version__
+
+        result.provenance["carditherapy_version"] = __version__
 
         result.provenance.setdefault("twin_state_artifact_id", request.twin_state_ref.artifact_id)
         if request.twin_state_ref.sha256 is not None:

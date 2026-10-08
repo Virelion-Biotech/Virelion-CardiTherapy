@@ -5,10 +5,10 @@
 CardiTherapy now executes reproducible, file-backed pacing-root experiments through the real CardiEP surface and native graph-Eikonal adapters. The validation supports software correctness and a narrow analytic activation-time calculation. It does **not** establish physiological pacing efficacy, patient personalization, uncertainty propagation, measured QRS duration, or clinical benefit. Other intervention classes remain schema contracts only.
 
 Baseline revision: `5f359d9cf6d7befe4c1323b7e927ff8240044603`.
-Pinned CardiEP revision: `2bcdd1ec2e282c1986d91459a0c39cea5b3ade15`.
+Configured CardiEP dependency pin: `2bcdd1ec2e282c1986d91459a0c39cea5b3ade15`.
 
 Baseline: 10 tests passed; statement coverage 80.33%, combined statement/branch coverage 77.72%. The baseline suite primarily exercised a fake CardiEP delegate.
-Repaired implementation: 82 tests passed with actual CardiEP installed; statement coverage 98.15%, combined statement/branch coverage 97.16%, branch coverage 94.44%.
+Repaired implementation: 83 tests passed with actual CardiEP installed; statement coverage 98.19%, combined statement/branch coverage 97.21%, branch coverage 94.50%.
 
 ## Verified repairs
 
@@ -57,3 +57,5 @@ A twin-state reference is verified when local, but its contents do not parameter
 A meaningful empirical pacing benchmark requires matched anatomy, coordinates/units, documented baseline and paced stimulation locations/timing, measured activation maps for both conditions, subject-level grouping, and held-out subjects/conditions. Calibration must use baseline data only; pacing-response outcomes must remain held out. ECG alone cannot directly validate an activation-span endpoint. Missing mapping, stimulation metadata or compatible observations must block the empirical benchmark, not be filled with guessed labels. No such paired patient dataset was run in this audit.
 
 Verification and physiological validation have different purposes. Galappaththige et al. distinguish code/calculation verification, real-world validation and input uncertainty in patient-specific cardiac models, including variation across patients: https://doi.org/10.1371/journal.pcbi.1010541. The FDA credibility guidance similarly ties evidence to a defined context of use: https://www.fda.gov/regulatory-information/search-fda-guidance-documents/assessing-credibility-computational-modeling-and-simulation-medical-device-submissions. These references inform the audit boundary; they are not validation evidence for CardiTherapy.
+
+Reports record installed delegate version and source-file hashes separately from the configured dependency pin. An observed Git installation commit must match that pin; editable local installs without VCS metadata report a null observed commit, never a fabricated one.

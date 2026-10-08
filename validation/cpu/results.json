@@ -1,5 +1,4 @@
 {
-  "cardiep_revision": "2bcdd1ec2e282c1986d91459a0c39cea5b3ade15",
   "checks": [
     {
       "coordinate_unit": "cm",
@@ -795,9 +794,38 @@
     }
   ],
   "computational_status": "passed",
+  "configured_cardiep_revision": "2bcdd1ec2e282c1986d91459a0c39cea5b3ade15",
+  "delegate_source_sha256": {
+    "__init__.py": "caf3e8ad19c810462d82694ac32b3c7326adaf869b07afb8f5ed72e1187546d2",
+    "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "api.py": "aff333ddae888ae69dff18417e4029060a55cac008bd6d99bc4d126f6d38802e",
+    "artifacts.py": "4c02cfd7e97ac06286cc36311d542ceb050b45d6ce847e698792aae40252affb",
+    "backends.py": "429213f1b6927273e28ea92f97463267cc070cd05cbe84fc2de0db4f4be0b830",
+    "cellular.py": "a30d8a7fb418b0663ba1e5b3cb0590e0583495b3cf7ff80795d5e0f349863720",
+    "cli.py": "d9d653c6ea4e5b72521baa68b107f7fdb906e38adde17ac9d03288494486ca06",
+    "conduction.py": "8d77f5e2d06423a1e42f2388f22ca5ae3f898c0f1a519e2e92c727eaf5c15a45",
+    "configuration.py": "7f7fe819cf316a992382c9cfa6e7992f6771e744643db5713a25d24774ba9765",
+    "discrepancy.py": "1e7adedfc952ec5debd78dbd804109da5085b0d9f65c3bc1cfe6fcfd50820990",
+    "ecg.py": "d64c159275d47165b82743e6c35d019b31438e6810f6e35926361a1713ef9cf3",
+    "external.py": "cca54ca79cd32b80f36b830e02e55ef9375bb1df3e9b89896b367d6f0f87d494",
+    "geometry.py": "90db1020d38f15e27a5669e181d480d2d0543091c220455374bf4ef636518e48",
+    "handoff.py": "e5f332db372e47682dec9f322e33bd09a9a4df9662d42628f3ee3d77af302e3b",
+    "models.py": "b40ac9899a30f8f5876ba80696d272523395845412d3c49dd63626b595a78cc9",
+    "native_backend.py": "20134bd7560ba7fa1956a7c975e89d5eb0a80133b8e972cf618cef1ea3d86943",
+    "propagation.py": "e1b7162f99146d6924e47fa9158975d0a198e12defdd59c181c78c316db77020",
+    "provenance.py": "52fc6f0ecf6a59085656fb461954d72620c1acc0fc333c871b920507babd185a",
+    "registry.py": "b0168e3c068ac13c6251a79c84201962f83d7a14f0d36474e3a442926692e285",
+    "repolarization.py": "6233d2855fead37425b0257b6440eae78cb4087834bb203d1237af0532d9471a",
+    "scientific_validation.py": "884b8a87a9278be0fa381586bd68957a2883596615fecc113423419c341d52dc",
+    "service.py": "bb601138cea4d57b669fcd7aa084257807842683dc26fe92154ca1989eeb6809",
+    "surface_backend.py": "47e0660f73501273402bd75d3d5e9896ac4ed7e2a83357bf549eec55015b2834",
+    "validation.py": "ab04efa5d8bb14336eadcc03c2b495204c3c3743e1ea204d58f3998fc8a272c4"
+  },
   "empirical_status": "not_validated",
   "fixture_status": "synthetic analytic geometry; no patient data",
   "independent_reference": "direct Euclidean edge distance / isotropic speed; triangle and tetrahedron are complete graphs",
+  "installed_cardiep_vcs_commit": null,
+  "installed_cardiep_version": "0.3.0",
   "limitations": [
     "Activation span is not measured ECG QRS duration.",
     "Posterior references do not propagate uncertainty.",
@@ -815,7 +843,7 @@
     "src/carditherapy/models.py": "f52f04e4fd0876cb12b68e94e1305dfdcaf81d471bd638cd56a7a199e4d68b46",
     "src/carditherapy/pacing_backend.py": "d5b6891aa9507af968a9f9ee7963ae622aff18156a7742b606abf7ba2d160503",
     "src/carditherapy/serialization.py": "ff9c416f1d46c54646755c8cc323f1738b6418c1d45827358f55bf6a5189a508",
-    "src/carditherapy/service.py": "7f6d17a4e744af3e7da8541d909d8d38ff4158575d552cddb3c2666d275318ae",
-    "src/carditherapy/validation.py": "1a613559fc7f8c8879b1e4bf627bf01e131cc42a661bb6a3f3fa73ee616502a0"
+    "src/carditherapy/service.py": "e475808e7ae47f44841240ba7543ce79f1eb981c149a0a3154c7f4676cfefbb6",
+    "src/carditherapy/validation.py": "f3f946e7cee49a452ae35858e211ddeb84d7ef19ee4a9123f37f54137a3b50cd"
   }
 }
