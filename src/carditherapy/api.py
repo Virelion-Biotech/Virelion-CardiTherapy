@@ -17,6 +17,7 @@ class TherapyAPI:
             "service": "CardiTherapy",
             "status": "ok",
             "backends": self.service.backends(),
+            "backend_availability": self.service.backend_availability(),
             "capabilities": list(self.capabilities),
         }
 

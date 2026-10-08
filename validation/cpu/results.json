@@ -1,0 +1,821 @@
+{
+  "cardiep_revision": "2bcdd1ec2e282c1986d91459a0c39cea5b3ade15",
+  "checks": [
+    {
+      "coordinate_unit": "cm",
+      "delegate": "surface-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 0.0,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 20.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 20.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 28.284271247461902
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 28.284271247461902
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.05
+    },
+    {
+      "coordinate_unit": "mm",
+      "delegate": "surface-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 0.0,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 20.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 20.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 28.284271247461902
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 28.284271247461902
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.05
+    },
+    {
+      "coordinate_unit": "cm",
+      "delegate": "surface-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 0.0,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 10.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 10.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 14.142135623730951
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 14.142135623730951
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.1
+    },
+    {
+      "coordinate_unit": "mm",
+      "delegate": "surface-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 0.0,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 10.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 10.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 14.142135623730951
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 14.142135623730951
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.1
+    },
+    {
+      "coordinate_unit": "cm",
+      "delegate": "surface-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 0.0,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 5.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 5.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 7.0710678118654755
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 7.0710678118654755
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.2
+    },
+    {
+      "coordinate_unit": "mm",
+      "delegate": "surface-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 0.0,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 5.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 5.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 7.0710678118654755
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "surface-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 7.0710678118654755
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.2
+    },
+    {
+      "coordinate_unit": "cm",
+      "delegate": "numpy-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 3.552713678800501e-15,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 20.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 20.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 28.2842712474619
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 28.2842712474619
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.05
+    },
+    {
+      "coordinate_unit": "cm",
+      "delegate": "numpy-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 1.7763568394002505e-15,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 10.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 10.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 14.14213562373095
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 14.14213562373095
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.1
+    },
+    {
+      "coordinate_unit": "cm",
+      "delegate": "numpy-eikonal-v1",
+      "deterministic": true,
+      "maximum_absolute_error_ms": 8.881784197001252e-16,
+      "outcomes": [
+        {
+          "arm_id": "control",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 5.0
+        },
+        {
+          "arm_id": "control",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 5.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_min_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 0.0
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_max_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 7.071067811865475
+        },
+        {
+          "arm_id": "paced",
+          "endpoint": "activation_span_ms",
+          "metadata": {
+            "ep_backend": "numpy-eikonal-v1",
+            "intervention_ids": [
+              "pace"
+            ],
+            "model_service": "CardiEP"
+          },
+          "uncertainty_ref": null,
+          "unit": "ms",
+          "value": 7.071067811865475
+        }
+      ],
+      "passed": true,
+      "speed_cm_per_ms": 0.2
+    }
+  ],
+  "computational_status": "passed",
+  "empirical_status": "not_validated",
+  "fixture_status": "synthetic analytic geometry; no patient data",
+  "independent_reference": "direct Euclidean edge distance / isotropic speed; triangle and tetrahedron are complete graphs",
+  "limitations": [
+    "Activation span is not measured ECG QRS duration.",
+    "Posterior references do not propagate uncertainty.",
+    "Twin-state references establish lineage, not a personalized electrophysiology model.",
+    "No held-out observed pacing responses or clinical outcomes tested.",
+    "Non-pacing therapy classes have contracts only, no executable validated backend."
+  ],
+  "schema_version": "carditherapy-cpu-validation-v1",
+  "source_sha256": {
+    "src/carditherapy/__init__.py": "0e302b7ac31fecf4a7a5eb262d9c8f4f3e1a86658b57ce1e0cfdcb0f726bc202",
+    "src/carditherapy/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/carditherapy/api.py": "bd51d7238929ccc6897d4b6b699a1f7fd3ebe454f5cfc370f46d5f82d7bc30db",
+    "src/carditherapy/backends.py": "6c4cbaffcb70ebab2f96f903d9d92f9ebe7ecf92e5938d4d649cc2eecd37dbb3",
+    "src/carditherapy/cli.py": "8f3efcb28500f2da7ae34ab8fd202ff37635da58b8990df63207059d46fa2e94",
+    "src/carditherapy/models.py": "f52f04e4fd0876cb12b68e94e1305dfdcaf81d471bd638cd56a7a199e4d68b46",
+    "src/carditherapy/pacing_backend.py": "d5b6891aa9507af968a9f9ee7963ae622aff18156a7742b606abf7ba2d160503",
+    "src/carditherapy/serialization.py": "ff9c416f1d46c54646755c8cc323f1738b6418c1d45827358f55bf6a5189a508",
+    "src/carditherapy/service.py": "7f6d17a4e744af3e7da8541d909d8d38ff4158575d552cddb3c2666d275318ae",
+    "src/carditherapy/validation.py": "1a613559fc7f8c8879b1e4bf627bf01e131cc42a661bb6a3f3fa73ee616502a0"
+  }
+}

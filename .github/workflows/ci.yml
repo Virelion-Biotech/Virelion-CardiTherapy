@@ -1,30 +1,54 @@
 name: CI
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ['3.10', '3.11', '3.12', '3.13']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - run: python -m pip install --upgrade pip
       - run: python -m pip install -e '.[dev]'
-      - run: ruff check src tests
-      - run: pytest -q
+      - run: ruff check src tests scripts
+      - run: ruff format --check src tests scripts
+      - run: pytest -q --cov=carditherapy --cov-branch --cov-fail-under=90
       - run: carditherapy doctor
+  stack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e '.[dev,cardiep]'
+      - run: pytest -q --cov=carditherapy --cov-branch --cov-fail-under=95
+      - run: python scripts/validate_cpu.py --output /tmp/carditherapy-validation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cpu-validation
+          path: /tmp/carditherapy-validation.json
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install build
+      - run: python -m build
+      - run: python -m venv /tmp/therapy-wheel
+      - run: /tmp/therapy-wheel/bin/pip install dist/*.whl
+      - run: cd /tmp && /tmp/therapy-wheel/bin/carditherapy --version
+      - run: cd /tmp && /tmp/therapy-wheel/bin/carditherapy doctor

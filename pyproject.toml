@@ -1,13 +1,14 @@
 [project]
 name = "virelion-carditherapy"
-version = "0.1.0"
+version = "0.2.0"
 description = "Virtual-intervention experiment contracts and orchestration for Virelion HeartTwin"
 requires-python = ">=3.10"
 license = {text = "AGPL-3.0-or-later"}
 dependencies = ["pydantic>=2.6,<3"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6"]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.16,<0.17", "build>=1"]
+cardiep = ["virelion-cardiep @ git+https://github.com/Virelion-Biotech/Virelion-CardiEP.git@2bcdd1ec2e282c1986d91459a0c39cea5b3ade15"]
 
 [project.scripts]
 carditherapy = "carditherapy.cli:main"
@@ -24,3 +25,6 @@ line-length = 100
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+carditherapy = ["py.typed"]

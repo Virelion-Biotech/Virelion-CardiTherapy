@@ -14,3 +14,7 @@ htmlcov/
 outputs/
 artifacts/
 intervention_runs/
+
+cardiep_runs/
+validation/temporary/
+.coverage.*

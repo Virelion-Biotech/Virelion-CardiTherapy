@@ -20,3 +20,16 @@ CardiTherapy is called only after HeartTwin has an explicit canonical twin state
 HeartTwin retains the complete intervention plan, comparator definitions, backend identities, model-state references, posterior reference, outcome artifacts, validation status, and provenance as a typed therapy artifact.
 
 CardiTherapy is an in-silico experiment engine. HeartTwin must not present a simulated arm comparison as a treatment recommendation or predicted clinical benefit without appropriate independent evidence.
+
+## Execution boundary in 0.2.0
+
+Every returned result must match the plan ID and complete arm/endpoint matrix.
+Request identity is recorded as `therapy_request_sha256`, accompanied by the
+complete request snapshot. This hash includes file URIs and output directories;
+it identifies an exact request, not a path-independent biological experiment.
+
+The pacing adapter preserves all CardiEP outputs, actual arm settings and hashes.
+Anatomy inputs and fixed EP parameters drive the calculation. State/posterior
+references provide lineage; posterior uncertainty is explicitly not propagated.
+`software_checked` describes the orchestration level even if a delegate reports
+a higher status. No automatic treatment ranking or clinical outcome is emitted.
