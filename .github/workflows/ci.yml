@@ -23,7 +23,7 @@ jobs:
       - run: python -m pip install -e '.[dev]'
       - run: ruff check src tests scripts
       - run: ruff format --check src tests scripts
-      - run: pytest -q --cov=carditherapy --cov-branch --cov-fail-under=90
+      - run: pytest -q --cov=carditherapy --cov-branch --cov-config=.coveragerc.unit --cov-fail-under=95
       - run: carditherapy doctor
   stack:
     runs-on: ubuntu-latest
