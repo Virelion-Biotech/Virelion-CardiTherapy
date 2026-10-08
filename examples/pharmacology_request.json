@@ -1,0 +1,98 @@
+{
+  "subject_id": "synthetic-therapy",
+  "backend": "iv-pkpd-v1",
+  "twin_state_ref": {
+    "artifact_id": "synthetic_state.json",
+    "kind": "cardiac_state",
+    "uri": "examples/synthetic_state.json",
+    "sha256": "55cb4c246121c13ff970c526ef59dafb94fc9bc52db8331a6d23a39acce4f304"
+  },
+  "baseline_refs": [
+    {
+      "artifact_id": "pkpd_model.json",
+      "kind": "therapy_pkpd_model",
+      "uri": "examples/pkpd_model.json",
+      "sha256": "0f9511404d235eb06c9f3076bb9d73fe60be0b454be8c561ff6219c1e6e4ae74"
+    }
+  ],
+  "plan": {
+    "plan_id": "synthetic-verification",
+    "arms": [
+      {
+        "arm_id": "control",
+        "label": "No intervention comparator",
+        "is_comparator": true
+      },
+      {
+        "arm_id": "intervention",
+        "label": "Prescribed model perturbation",
+        "interventions": [
+          {
+            "intervention_id": "bolus",
+            "kind": "pharmacologic",
+            "target": "iv_bolus",
+            "parameters": {
+              "doses": [
+                {
+                  "time_h": 0,
+                  "amount_mg": 10
+                },
+                {
+                  "time_h": 4,
+                  "amount_mg": 10
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "endpoints": [
+      "plasma_cmax_mg_L",
+      "plasma_auc_mg_h_L",
+      "unbound_cmax_uM",
+      "terminal_amount_mg",
+      "eliminated_amount_mg",
+      "sampled_peak_block_IKr",
+      "sampled_peak_block_ICaL"
+    ]
+  },
+  "settings": {
+    "output_dir": "runs/synthetic-therapy",
+    "sample_times_h": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0
+    ]
+  }
+}

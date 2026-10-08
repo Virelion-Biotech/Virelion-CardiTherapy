@@ -15,7 +15,7 @@ from carditherapy.pacing_backend import _local_path, _verify_local_ref
 def test_health_reports_executable_availability():
     service = CardiTherapyService()
     health = TherapyAPI(service).health()
-    assert health["backends"] == ["cardiep-pacing-v1"]
+    assert health["backends"] == ["cardiep-pacing-v1", "graph-ablation-v1", "iv-pkpd-v1"]
     assert health["backend_availability"] == service.backend_availability()
 
 

@@ -1,0 +1,56 @@
+{
+  "subject_id": "synthetic-therapy",
+  "backend": "graph-ablation-v1",
+  "twin_state_ref": {
+    "artifact_id": "synthetic_state.json",
+    "kind": "cardiac_state",
+    "uri": "examples/synthetic_state.json",
+    "sha256": "55cb4c246121c13ff970c526ef59dafb94fc9bc52db8331a6d23a39acce4f304"
+  },
+  "baseline_refs": [
+    {
+      "artifact_id": "ablation_graph.json",
+      "kind": "therapy_conduction_graph",
+      "uri": "examples/ablation_graph.json",
+      "sha256": "e40638972c2210f5d6fe24e84aa8b90afda48c91c25b18e10f8db10920562d42"
+    }
+  ],
+  "plan": {
+    "plan_id": "synthetic-verification",
+    "arms": [
+      {
+        "arm_id": "control",
+        "label": "No intervention comparator",
+        "is_comparator": true
+      },
+      {
+        "arm_id": "intervention",
+        "label": "Prescribed model perturbation",
+        "interventions": [
+          {
+            "intervention_id": "lesion",
+            "kind": "ablation",
+            "target": "conduction_graph",
+            "parameters": {
+              "center_mm": [
+                2,
+                0,
+                0
+              ],
+              "radius_mm": 0.5
+            }
+          }
+        ]
+      }
+    ],
+    "endpoints": [
+      "lesion_node_fraction",
+      "viable_reached_fraction",
+      "unreachable_viable_nodes",
+      "activation_span_reachable_ms"
+    ]
+  },
+  "settings": {
+    "output_dir": "runs/synthetic-therapy"
+  }
+}

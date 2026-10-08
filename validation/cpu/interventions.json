@@ -1,0 +1,141 @@
+{
+  "computational_status": "passed",
+  "empirical_status": "not_validated",
+  "environment": {
+    "numpy": "2.5.3",
+    "python": "3.12.14",
+    "scipy": "1.18.1"
+  },
+  "graph_checks": [
+    {
+      "lesion_nodes": 0,
+      "maximum_error_ms": 0.0,
+      "nodes": 6,
+      "passed": true,
+      "reachability_matches": true
+    },
+    {
+      "lesion_nodes": 1,
+      "maximum_error_ms": 0.0,
+      "nodes": 6,
+      "passed": true,
+      "reachability_matches": true
+    },
+    {
+      "lesion_nodes": 0,
+      "maximum_error_ms": 0.0,
+      "nodes": 12,
+      "passed": true,
+      "reachability_matches": true
+    },
+    {
+      "lesion_nodes": 3,
+      "maximum_error_ms": 0.0,
+      "nodes": 12,
+      "passed": true,
+      "reachability_matches": true
+    },
+    {
+      "lesion_nodes": 0,
+      "maximum_error_ms": 0.0,
+      "nodes": 30,
+      "passed": true,
+      "reachability_matches": true
+    },
+    {
+      "lesion_nodes": 9,
+      "maximum_error_ms": 0.0,
+      "nodes": 30,
+      "passed": true,
+      "reachability_matches": true
+    }
+  ],
+  "graph_reference": "SciPy Floyd-Warshall on independently constructed lesion-masked matrices",
+  "limitations": [
+    "Synthetic model parameters only; no patient responses tested.",
+    "Graph lesion fraction counts nodes, not tissue volume; no thermal formation or reentry.",
+    "Channel block is static pore inhibition, not ionic dynamics or clinical efficacy.",
+    "Effect-site peak remains sample-grid dependent.",
+    "No regenerative, surgical or device efficacy model supplied."
+  ],
+  "pharmacology_checks": [
+    {
+      "auc_error_mg_h_L": 1.7053025658242404e-13,
+      "effect_rate_h_inv": null,
+      "mass_balance_residual_mg": 0.0,
+      "maximum_effect_site_error_uM": 7.105427357601002e-14,
+      "maximum_hill_block_error": 1.0658141036401503e-14,
+      "maximum_plasma_error_mg_L": 7.105427357601002e-14,
+      "passed": true
+    },
+    {
+      "auc_error_mg_h_L": 1.6342482922482304e-13,
+      "effect_rate_h_inv": 0.1,
+      "mass_balance_residual_mg": 0.0,
+      "maximum_effect_site_error_uM": 7.016609515630989e-14,
+      "maximum_hill_block_error": 4.2577052994374753e-14,
+      "maximum_plasma_error_mg_L": 7.327471962526033e-14,
+      "passed": true
+    },
+    {
+      "auc_error_mg_h_L": 1.758593271006248e-13,
+      "effect_rate_h_inv": 0.2,
+      "mass_balance_residual_mg": 0.0,
+      "maximum_effect_site_error_uM": 3.4583447217073626e-13,
+      "maximum_hill_block_error": 1.9728663147589032e-13,
+      "maximum_plasma_error_mg_L": 7.37188088351104e-14,
+      "passed": true
+    },
+    {
+      "auc_error_mg_h_L": 1.758593271006248e-13,
+      "effect_rate_h_inv": 0.20000000000001,
+      "mass_balance_residual_mg": 0.0,
+      "maximum_effect_site_error_uM": 3.453903829608862e-13,
+      "maximum_hill_block_error": 1.9712009802219654e-13,
+      "maximum_plasma_error_mg_L": 7.37188088351104e-14,
+      "passed": true
+    },
+    {
+      "auc_error_mg_h_L": 1.438849039914203e-13,
+      "effect_rate_h_inv": 0.5,
+      "mass_balance_residual_mg": 0.0,
+      "maximum_effect_site_error_uM": 3.2112090764258028e-12,
+      "maximum_hill_block_error": 8.569256415569271e-13,
+      "maximum_plasma_error_mg_L": 4.440892098500626e-14,
+      "passed": true
+    }
+  ],
+  "pharmacology_reference": "SciPy adaptive ODE plasma/effect/AUC with explicit bolus jumps; independent Hill algebra",
+  "sampling_refinement": [
+    {
+      "peak_block_absolute_error": 0.01109983541157833,
+      "sample_spacing_h": 2.0
+    },
+    {
+      "peak_block_absolute_error": 4.571144649490044e-05,
+      "sample_spacing_h": 1.0
+    },
+    {
+      "peak_block_absolute_error": 3.162519642591066e-05,
+      "sample_spacing_h": 0.1
+    }
+  ],
+  "sampling_refinement_passed": true,
+  "schema_version": "carditherapy-intervention-verification-v1",
+  "source_sha256": {
+    "scripts/validate_interventions.py": "c1ccfacf5234d87d139e3b28b9492368cedb3e5115d8a9a7e1f855e5b40aa2a9",
+    "src/carditherapy/__init__.py": "22702cf05daf7c26d309bb13edc8139f1cabc419eacc11409fd46f60b731cf41",
+    "src/carditherapy/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/carditherapy/ablation_backend.py": "63f151515d494384da16fabdcb9b4b0ab5cb3ecee9a3cdbdde31c70154c8f79e",
+    "src/carditherapy/api.py": "99e91b974e7c5204c2f83d73ce0256c8dcb90577f1a98cc7aece24771b033938",
+    "src/carditherapy/backends.py": "6c4cbaffcb70ebab2f96f903d9d92f9ebe7ecf92e5938d4d649cc2eecd37dbb3",
+    "src/carditherapy/cli.py": "8f3efcb28500f2da7ae34ab8fd202ff37635da58b8990df63207059d46fa2e94",
+    "src/carditherapy/models.py": "8f5590f2566fdc3e174894f60ec69676476b617c92ccc205fc1eac50d6f9134a",
+    "src/carditherapy/pacing_backend.py": "351dca65ec6bb3ab1ee4396ce08139128741d2807c746d151ec96be868af02ec",
+    "src/carditherapy/pharmacology_backend.py": "4b5195b17f9c0fc418447087faafdcb4cd82bae330b54bb4ffc6d68a1fb30f54",
+    "src/carditherapy/research.py": "2dce9464714944b6c4ebc34b67df77ec0dd91c0703dfbcfe47143575f64d4c72",
+    "src/carditherapy/serialization.py": "ff9c416f1d46c54646755c8cc323f1738b6418c1d45827358f55bf6a5189a508",
+    "src/carditherapy/service.py": "74f76867d16eba21c60d2c963f3b1641fdc3bd7a392fde6110d6b54930b562b9",
+    "src/carditherapy/validation.py": "8f7cc323144131b6ccafe4b8b9d732a62012b88a8f13bed4e1cbc0e347ecfa2b"
+  }
+}

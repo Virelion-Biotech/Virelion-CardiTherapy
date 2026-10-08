@@ -20,6 +20,11 @@ class CardiTherapyService:
             from .pacing_backend import CardiEPPacingBackend
 
             self.register_backend(CardiEPPacingBackend())
+            from .ablation_backend import GraphAblationBackend
+            from .pharmacology_backend import PharmacologyBackend
+
+            self.register_backend(GraphAblationBackend())
+            self.register_backend(PharmacologyBackend())
         for backend in backends or []:
             self.register_backend(backend)
 
@@ -36,6 +41,14 @@ class CardiTherapyService:
     def backend_availability(self) -> dict[str, bool]:
         return {name: backend.available() for name, backend in sorted(self._backends.items())}
 
+    def backend_details(self):
+        return {
+            name: backend.describe()
+            if hasattr(backend, "describe")
+            else {"name": name, "scientific_scope": "unspecified"}
+            for name, backend in sorted(self._backends.items())
+        }
+
     def _backend(self, name: str) -> TherapyBackend:
         backend = self._backends.get(name)
         if backend is None or not backend.available():
@@ -48,6 +61,11 @@ class CardiTherapyService:
         snapshot = request.model_dump(mode="json")
         result = self._backend(request.backend).run(request.model_copy(deep=True))
         result = InterventionRunResult.model_validate(result.model_dump(mode="python"))
+        if (
+            any(item.endpoint_scope == "patient_outcome" for item in result.outcomes)
+            and result.validation_status != "empirically_checked"
+        ):
+            raise ReadinessError("Patient outcomes require empirical validation")
         if result.subject_id != request.subject_id:
             raise ReadinessError("Backend returned intervention results for a different subject")
         if result.backend != request.backend:

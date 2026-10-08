@@ -106,6 +106,7 @@ class InterventionOutcome(ContractModel):
 
     arm_id: str
     endpoint: str
+    endpoint_scope: Literal["model_proxy", "patient_outcome"] = "model_proxy"
     value: float | None = None
     unit: str | None = None
     artifact_ref: ArtifactRef | None = None

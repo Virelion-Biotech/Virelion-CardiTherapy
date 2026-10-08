@@ -1,0 +1,21 @@
+{
+  "subject_id": "synthetic-therapy",
+  "volume_L": 10,
+  "clearance_L_h": 2,
+  "molecular_weight_g_mol": 500,
+  "unbound_fraction": 0.5,
+  "effect_rate_h_inv": 0.5,
+  "channels": {
+    "IKr": {
+      "ic50_uM": 1,
+      "hill": 1.5,
+      "source": "synthetic verification, not measured drug data"
+    },
+    "ICaL": {
+      "ic50_uM": 5,
+      "hill": 1,
+      "source": "synthetic verification, not measured drug data"
+    }
+  },
+  "parameter_source": "synthetic verification, not patient PK"
+}

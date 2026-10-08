@@ -155,6 +155,6 @@ def run_cpu_validation(root: Path):
             "Posterior references do not propagate uncertainty.",
             "Twin-state references establish lineage, not a personalized electrophysiology model.",
             "No held-out observed pacing responses or clinical outcomes tested.",
-            "Non-pacing therapy classes have contracts only, no executable validated backend.",
+            "This report covers pacing only; additional restricted numerical backends have separate verification.",
         ],
     }

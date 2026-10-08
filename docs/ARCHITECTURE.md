@@ -24,7 +24,7 @@ personalized HeartTwin state
 
 ## Responsibility boundary
 
-CardiTherapy owns experiment definition, intervention-arm orchestration, and typed intervention outcomes. It does not own the forward equations used to simulate electrophysiology, mechanics, flow, or molecular state.
+CardiTherapy owns experiment definition, intervention-arm orchestration, and typed intervention outcomes. It delegates spatial electrophysiology, mechanics, flow and molecular forward equations. Version 0.3.0 also owns restricted weighted-graph lesion and one-compartment PK/Hill experiment backends, with explicit model-proxy endpoints.
 
 Those remain in CardiEP, CardiMech, CardiFlow, CardiSim, or future specialist backends. CardiInfer owns posterior inference and uncertainty propagation. CardiEval should own independent evaluation.
 
@@ -42,3 +42,8 @@ The contract supports pacing, ablation, pharmacologic, device, regenerative, sur
 6. External prospective validation where appropriate.
 
 CardiTherapy must not transform model outputs into clinical recommendations.
+
+All built-in endpoints have `endpoint_scope: model_proxy`. The service rejects
+`patient_outcome` results lacking `empirically_checked` status. That status must
+be backed by appropriate independent evidence from any external backend; merely
+setting a label does not establish validity.

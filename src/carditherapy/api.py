@@ -18,6 +18,7 @@ class TherapyAPI:
             "status": "ok",
             "backends": self.service.backends(),
             "backend_availability": self.service.backend_availability(),
+            "backend_details": self.service.backend_details(),
             "capabilities": list(self.capabilities),
         }
 

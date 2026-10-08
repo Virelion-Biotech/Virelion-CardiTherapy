@@ -1,5 +1,9 @@
 # CardiTherapy 0.2.0 CPU audit
 
+Historical pacing audit. Release 0.3.0 adds separately verified restricted
+ablation and pharmacology backends; see [model contracts](INTERVENTION_MODELS.md)
+and `validation/cpu/interventions.json`. The statements below describe 0.2.0.
+
 ## Scope and conclusion
 
 CardiTherapy now executes reproducible, file-backed pacing-root experiments through the real CardiEP surface and native graph-Eikonal adapters. The validation supports software correctness and a narrow analytic activation-time calculation. It does **not** establish physiological pacing efficacy, patient personalization, uncertainty propagation, measured QRS duration, or clinical benefit. Other intervention classes remain schema contracts only.

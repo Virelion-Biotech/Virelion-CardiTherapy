@@ -81,6 +81,17 @@ class CardiEPPacingBackend:
     def __init__(self, api_factory: Callable[[], Any] | None = None) -> None:
         self._api_factory = api_factory
 
+    def describe(self):
+        return {
+            "name": self.name,
+            "intervention_kinds": ["pacing"],
+            "endpoints": sorted(_SUPPORTED_ENDPOINTS),
+            "endpoint_scope": "model_proxy",
+            "requires": "CardiEP anatomy and fixed EP parameters",
+            "patient_validated": False,
+            "model": "CardiEP activation-root perturbation",
+        }
+
     def _api(self) -> Any:
         if self._api_factory is not None:
             return self._api_factory()
@@ -372,6 +383,8 @@ class CardiEPPacingBackend:
                         unit="ms",
                         artifact_ref=summary_ref,
                         metadata={
+                            "domain": "activation",
+                            "patient_validated": False,
                             "model_service": "CardiEP",
                             "ep_backend": ep_backend,
                             "intervention_ids": [

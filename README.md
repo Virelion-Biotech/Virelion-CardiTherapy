@@ -15,7 +15,7 @@ CardiTherapy owns:
 - uncertainty links back to CardiInfer;
 - reproducible intervention manifests and provenance.
 
-CardiTherapy is **not** a clinical treatment recommender. It does not select therapy for a patient and does not fabricate efficacy when no validated backend exists. The built-in `cardiep-pacing-v1` backend is deliberately narrow: it delegates pacing-root changes to CardiEP and reports activation-timing endpoints only.
+CardiTherapy is **not** a clinical treatment recommender. It does not select therapy for a patient and does not fabricate efficacy when no validated backend exists. The built-in backends execute restricted pacing, prescribed-lesion ablation and IV pharmacology experiments. Their endpoints are explicitly labeled model proxies; none is a patient outcome model.
 
 ## Quick start
 
@@ -45,8 +45,9 @@ activation-root settings such as `root_node`, `root_nodes`, and
 
 The only supported endpoints are `activation_span_ms`,
 `activation_min_ms`, and `activation_max_ms`. These are EP simulation
-outputs, not clinical outcomes. Ablation, pharmacologic, device efficacy,
-regenerative, surgical, and patient-benefit endpoints continue to fail closed.
+outputs, not clinical outcomes. The additional ablation and pharmacology backends below have separate model and
+endpoint contracts. Device efficacy, regenerative, surgical and patient-benefit
+endpoints continue to fail closed.
 
 ## CPU-verified release 0.2.0
 
@@ -80,4 +81,41 @@ parameterize this backend or propagate uncertainty.
 The nine analytic experiments validate technical activation-time calculations
 and reproducibility. No measured patient pacing responses were tested. Activation
 span is not measured ECG QRS duration, and simulated changes do not establish
-clinical benefit. Other therapy types remain contract-only.
+clinical benefit. The 0.2.0 notebook covers pacing only. Version 0.3.0 adds restricted ablation
+and pharmacology experiments; other therapy types remain contract-only.
+
+
+## Additional executable models (0.3.0)
+
+| Backend | Implemented model | Supported endpoints | Scientific limit |
+|---|---|---|---|
+| `cardiep-pacing-v1` | CardiEP activation-root perturbation | Activation min/max/span | No measured QRS or patient benefit |
+| `graph-ablation-v1` | Prescribed binary nonconducting lesion on a weighted graph | Lesion node fraction, viable tissue reachability, disconnected nodes, reachable activation span | No thermal lesion formation, reentry or arrhythmia termination |
+| `iv-pkpd-v1` | Exact one-compartment repeated IV bolus exposure, optional effect compartment, Hill channel inhibition | Peak exposure, exact AUC, remaining/eliminated amount, sampled peak channel block | No action potential, QT, efficacy or dosing recommendation |
+
+Both new backends run with the core installation on CPU. Run examples from the
+repository root:
+
+```bash
+carditherapy run examples/ablation_request.json --output /tmp/ablation.json
+carditherapy run examples/pharmacology_request.json --output /tmp/pharmacology.json
+python -m pip install -e '.[dev,validation,cardiep]'
+python scripts/validate_interventions.py
+```
+
+Examples use synthetic parameters and geometry. Outputs retain SHA-256 traces,
+comparator differences, `endpoint_scope: "model_proxy"`, endpoint domain and
+`patient_validated: false`. Doctor exposes each backend's capabilities and limits.
+New backends reject posterior references because they do not propagate posterior
+uncertainty. Regenerative, surgical, device efficacy and clinical patient outcome
+models remain unimplemented. These gaps cannot be resolved by assigning benefit
+to model proxies.
+
+Independent verification compares lesion propagation with Floyd-Warshall, PK and
+effect-site concentrations/AUC with adaptive ODE integration, and channel block
+with separate algebra. The committed [numerical report](validation/cpu/interventions.json)
+records model and source provenance and sampling refinement. This is numerical
+verification, not measured treatment-response validation.
+
+See [model contracts and equations](docs/INTERVENTION_MODELS.md) for assumptions,
+units, endpoint definitions and the empirical evidence still needed.

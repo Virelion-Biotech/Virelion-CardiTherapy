@@ -33,3 +33,21 @@ Anatomy inputs and fixed EP parameters drive the calculation. State/posterior
 references provide lineage; posterior uncertainty is explicitly not propagated.
 `software_checked` describes the orchestration level even if a delegate reports
 a higher status. No automatic treatment ranking or clinical outcome is emitted.
+
+
+## Numerical intervention models in 0.3.0
+
+`therapy.health.backend_details` reports supported intervention kinds, endpoint
+names, required baseline model and `patient_validated: false` for each built-in
+backend. All built-in outcomes declare `endpoint_scope: model_proxy`.
+`graph-ablation-v1` and `iv-pkpd-v1` consume explicit local baseline model artifacts
+and reject posterior references. They require one empty comparator and one
+intervention per active arm, preflight all arms, and write isolated immutable
+run traces after numerical completion. Comparator differences are signed raw
+endpoint changes, not treatment rankings or efficacy estimates.
+
+Ablation traces report unreached viable nodes separately from ablated nodes.
+Consumers must not interpret a shorter activation span among remaining reached
+nodes as improved global activation. PK channel-block peaks are sampled when an
+effect compartment is enabled; sample-grid refinement is required. No patient
+outcome or probability of clinical benefit is generated.

@@ -32,13 +32,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install -e '.[dev,cardiep]'
+      - run: python -m pip install -e '.[dev,validation,cardiep]'
       - run: pytest -q --cov=carditherapy --cov-branch --cov-fail-under=95
       - run: python scripts/validate_cpu.py --output /tmp/carditherapy-validation.json
+      - run: python scripts/validate_interventions.py --output /tmp/carditherapy-interventions.json
+      - run: carditherapy run examples/ablation_request.json --output /tmp/ablation-result.json
+      - run: carditherapy run examples/pharmacology_request.json --output /tmp/pharmacology-result.json
       - uses: actions/upload-artifact@v4
         with:
           name: cpu-validation
-          path: /tmp/carditherapy-validation.json
+          path: |
+            /tmp/carditherapy-validation.json
+            /tmp/carditherapy-interventions.json
   package:
     runs-on: ubuntu-latest
     steps:
@@ -52,3 +57,6 @@ jobs:
       - run: /tmp/therapy-wheel/bin/pip install dist/*.whl
       - run: cd /tmp && /tmp/therapy-wheel/bin/carditherapy --version
       - run: cd /tmp && /tmp/therapy-wheel/bin/carditherapy doctor
+
+      - run: cd "$GITHUB_WORKSPACE" && /tmp/therapy-wheel/bin/carditherapy run examples/ablation_request.json --output /tmp/wheel-ablation.json
+      - run: cd "$GITHUB_WORKSPACE" && /tmp/therapy-wheel/bin/carditherapy run examples/pharmacology_request.json --output /tmp/wheel-pharmacology.json
