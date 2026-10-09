@@ -379,6 +379,7 @@ class CardiEPPacingBackend:
                     InterventionOutcome(
                         arm_id=arm.arm_id,
                         endpoint=endpoint,
+                        endpoint_tier="electrical",
                         value=values[endpoint],
                         unit="ms",
                         artifact_ref=summary_ref,
