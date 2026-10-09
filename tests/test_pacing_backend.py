@@ -125,6 +125,7 @@ def test_cardiep_pacing_backend_delegates_each_arm_and_returns_endpoints(
     assert result.backend == PACING_BACKEND_NAME
     assert result.validation_status == "software_checked"
     assert [item.arm_id for item in result.outcomes] == ["control", "paced"]
+    assert all(item.endpoint_tier == "electrical" for item in result.outcomes)
     assert result.outcomes[0].value == pytest.approx(120.0)
     assert result.outcomes[1].value == pytest.approx(100.0)
     assert api.calls[0]["settings"]["root_node"] == 0

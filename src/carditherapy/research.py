@@ -122,6 +122,9 @@ def finish(request, arms, provenance, warning, scopes, units):
                     unit=units[endpoint],
                     artifact_ref=ref,
                     endpoint_scope="model_proxy",
+                    endpoint_tier="electrical"
+                    if request.backend == "graph-ablation-v1"
+                    else "pharmacology_proxy",
                     metadata={
                         "domain": scopes[endpoint],
                         "comparator_arm_id": comparator,
