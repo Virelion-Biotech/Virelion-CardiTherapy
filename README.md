@@ -4,6 +4,21 @@ Virtual-intervention layer for the Virelion HeartTwin stack.
 
 CardiTherapy defines contracts for reproducible in-silico intervention experiments on an already specified cardiac twin. It supports explicit intervention plans, comparator arms, intervention-specific backend adapters, outcome artifacts, uncertainty references, and provenance.
 
+
+<!-- VALIDATION_PRODUCT_STATUS:BEGIN -->
+## Validation and product completion status
+
+**Reviewed 2026-10-14; implementation base `1907943a04f1`.** **Status: Restricted model-proxy interventions numerically checked; measured benefit unqualified.** This is an evidence-backed scope assessment, not a percentage-complete estimate or a declaration that the product is finished.
+
+| Area | Current evidence / remaining gate |
+|---|---|
+| Software / operational checks | Automated test sources and CI definitions are present; this documentation audit does not report a new algorithm/data-validation run. |
+| Scientific or domain evidence | Pacing, prescribed-graph-lesion ablation and IV PK/PD backends are executable. Independent numerical checks concern model proxies; device efficacy, regenerative/surgical and patient-benefit outcomes remain unsupported. |
+| Remaining for the declared product scope | Validate supported endpoints against independent measured treatment responses and explicit baseline calibration; implement posterior propagation; add scientifically specified backends before exposing unsupported therapy types; qualify comparators, uncertainty and intended-use boundaries. |
+
+Evidence and limits: [repository report](docs/INTERVENTION_MODELS.md). The [organization status index](https://github.com/Virelion-Biotech/Virelion-HeartTwin/blob/main/docs/STACK_VALIDATION_STATUS.md) separates software, numerical, data-readiness and empirical qualification. Code/schema execution or a completed download is not a substitute for endpoint-specific validation.
+<!-- VALIDATION_PRODUCT_STATUS:END -->
+
 ## Scope
 
 CardiTherapy owns:
