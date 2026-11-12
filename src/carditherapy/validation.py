@@ -11,7 +11,7 @@ from .models import ArtifactRef, InterventionRunRequest
 from .serialization import write_json
 from .service import CardiTherapyService
 
-CARDIEP_REVISION = "2bcdd1ec2e282c1986d91459a0c39cea5b3ade15"
+CARDIEP_REVISION = "f9bfcb78cdb857e5995ce244d8645f7370d6b3bb"
 
 
 def _ref(path, artifact_id, kind):
