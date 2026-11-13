@@ -1,0 +1,5 @@
+# Exact false-positive fingerprints: 64-character SHA-256 hashes in saved validation manifests/results, not credentials.
+ccdc228d605e9029c29b4507e5ca812481b6b674:validation/cpu/results.json:generic-api-key:1003
+ccdc228d605e9029c29b4507e5ca812481b6b674:validation/cpu/interventions.json:generic-api-key:130
+7fc2e5b07069474153f972f8b880d4735e77b9df:validation/cpu/results.json:generic-api-key:801
+12081b4e13274b90aebb5c69b701239bcfd45578:validation/cpu/results.json:generic-api-key:812
