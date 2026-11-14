@@ -38,7 +38,7 @@ jobs:
       - run: python scripts/validate_interventions.py --output /tmp/carditherapy-interventions.json
       - run: carditherapy run examples/ablation_request.json --output /tmp/ablation-result.json
       - run: carditherapy run examples/pharmacology_request.json --output /tmp/pharmacology-result.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: cpu-validation
           path: |
