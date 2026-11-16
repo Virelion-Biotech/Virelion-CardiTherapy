@@ -41,6 +41,7 @@ class ArtifactRef(ContractModel):
 
 class RegenerativeInterventionSpec(ContractModel):
     """Evidence- and calibration-gated description of a non-executable intervention."""
+
     model_config = ConfigDict(extra="forbid")
     modality: Literal[
         "aav_gene_delivery",
@@ -61,16 +62,12 @@ class RegenerativeInterventionSpec(ContractModel):
     dose: float = Field(gt=0)
     dose_unit: str
     route: str
-    source_maturity: Literal[
-        "preclinical", "clinical", "regulatory", "company_reported", "unknown"
-    ]
+    source_maturity: Literal["preclinical", "clinical", "regulatory", "company_reported", "unknown"]
     source_record_ids: list[str] = Field(min_length=1)
     source_provenance: list[dict[str, Any]] = Field(min_length=1)
     comparator_definition: dict[str, Any]
     uncertainty_reference: dict[str, Any]
-    calibration_status: Literal[
-        "none", "model_proxy_calibrated", "empirically_calibrated"
-    ] = "none"
+    calibration_status: Literal["none", "model_proxy_calibrated", "empirically_calibrated"] = "none"
     calibration_evidence: list[dict[str, Any]] = Field(default_factory=list)
     model_supported_endpoints: list[
         Literal[
@@ -200,7 +197,9 @@ class Intervention(ContractModel):
         if self.kind in {"regenerative", "surgical"} and self.regenerative_spec is None:
             raise ValueError("regenerative/surgical interventions require regenerative_spec")
         if self.kind not in {"regenerative", "surgical"} and self.regenerative_spec is not None:
-            raise ValueError("regenerative_spec is only valid for regenerative/surgical interventions")
+            raise ValueError(
+                "regenerative_spec is only valid for regenerative/surgical interventions"
+            )
         if (
             self.regenerative_spec is not None
             and self.kind == "surgical"
