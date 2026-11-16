@@ -53,6 +53,8 @@ def test_model_proxy_cannot_claim_new_myocardium_or_clinical_benefit():
     with pytest.raises(ValidationError,match="model-proxy outcomes"):
         InterventionOutcome(arm_id="treated",endpoint="new_myocardium",value=1,unit="count",endpoint_domain="cardiomyocyte_number")
     with pytest.raises(ValidationError,match="model-proxy outcomes"):
+        InterventionOutcome(arm_id="treated",endpoint="new_cardiomyocytes",endpoint_domain="cardiomyocyte_number",value=1,unit="count")
+    with pytest.raises(ValidationError,match="model-proxy outcomes"):
         InterventionOutcome(arm_id="treated",endpoint="clinical_benefit",value=1,unit="score")
 
 def test_unregistered_regenerative_backend_fails_closed():
