@@ -100,9 +100,8 @@ class RegenerativeInterventionSpec(ContractModel):
                 if not isinstance(source.get(key),str) or not source[key].strip(): raise ValueError(f"source_provenance[{i}].{key} is required")
             digest=source["source_sha256"]
             if len(digest)!=64 or any(ch not in string.hexdigits for ch in digest): raise ValueError(f"source_provenance[{i}].source_sha256 must be SHA-256")
-        if self.model_supported_endpoints:
-            if self.calibration_status=="none" or not self.calibration_evidence:
-                raise ValueError("model endpoints require declared calibration evidence")
+        if self.model_supported_endpoints and (self.calibration_status=="none" or not self.calibration_evidence):
+            raise ValueError("model endpoints require declared calibration evidence")
         if self.calibration_status=="empirically_calibrated" and not self.calibration_evidence:
             raise ValueError("empirical calibration status requires calibration_evidence")
         return self
@@ -220,9 +219,8 @@ class InterventionOutcome(ContractModel):
         if self.value is None and self.artifact_ref is None:
             raise ValueError("Outcome requires a scalar value or artifact reference")
         endpoint=self.endpoint.casefold().replace("-", "_").replace(" ", "_")
-        if "ejection_fraction" in endpoint or endpoint in {"lvef","lvef_change"}:
-            if self.endpoint_domain not in {"ventricular_function","unspecified"}:
-                raise ValueError("LVEF is a ventricular-function endpoint, not cardiomyocyte generation or clinical benefit")
+        if ("ejection_fraction" in endpoint or endpoint in {"lvef","lvef_change"}) and self.endpoint_domain not in {"ventricular_function","unspecified"}:
+            raise ValueError("LVEF is a ventricular-function endpoint, not cardiomyocyte generation or clinical benefit")
         if endpoint in {"new_myocardium","new_cardiomyocytes","cardiomyocyte_generation"} and self.endpoint_domain not in {"cardiomyocyte_number","cytokinesis"}:
             raise ValueError("new myocardium claims require direct cell-generation endpoint domain")
         if self.endpoint_scope=="model_proxy" and endpoint in {"clinical_benefit","patient_benefit","new_myocardium","new_cardiomyocytes","cardiomyocyte_generation"}:
