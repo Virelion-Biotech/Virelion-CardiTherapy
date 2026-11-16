@@ -44,9 +44,7 @@ def base_spec(**overrides):
         "calibration_status": "none",
         "calibration_evidence": [],
         "model_supported_endpoints": [],
-        "model_limitations": [
-            "No validated regenerative backend; no clinical efficacy inference"
-        ],
+        "model_limitations": ["No validated regenerative backend; no clinical efficacy inference"],
         "payload": "synthetic mRNA payload description",
         "expression_window": "transient, measured in source",
         "tissue_targeting": "local injection",
@@ -113,7 +111,9 @@ def test_vascular_graft_is_a_separate_surgical_domain():
 
 
 def test_model_endpoint_requires_calibration_evidence():
-    with pytest.raises(ValidationError, match="model endpoints require declared calibration evidence"):
+    with pytest.raises(
+        ValidationError, match="model endpoints require declared calibration evidence"
+    ):
         RegenerativeInterventionSpec(
             **base_spec(model_supported_endpoints=["ventricular_function"])
         )
