@@ -125,6 +125,19 @@ class Intervention(ContractModel):
     parameters: dict[str, Any] = Field(default_factory=dict)
     model_service: str | None = None
     model_capability: str | None = None
+    regenerative_spec: RegenerativeInterventionSpec | None = None
+
+    @model_validator(mode="after")
+    def require_modality_contract(self):
+        if self.kind in {"regenerative", "surgical"} and self.regenerative_spec is None:
+            raise ValueError("regenerative/surgical interventions require regenerative_spec")
+        if self.kind not in {"regenerative", "surgical"} and self.regenerative_spec is not None:
+            raise ValueError("regenerative_spec is only valid for regenerative/surgical interventions")
+        if self.regenerative_spec is not None and self.kind == "surgical" and self.regenerative_spec.modality != "vascular_tissue_engineered_graft":
+            raise ValueError("surgical regenerative spec currently supports vascular graft class only")
+        if self.regenerative_spec is not None and self.kind == "regenerative" and self.regenerative_spec.modality == "vascular_tissue_engineered_graft":
+            raise ValueError("vascular grafts must use kind=surgical and vascular_surgical domain")
+        return self
 
 
 class InterventionArm(ContractModel):
@@ -176,6 +189,7 @@ class InterventionOutcome(ContractModel):
     arm_id: str
     endpoint: str
     endpoint_scope: Literal["model_proxy", "patient_outcome"] = "model_proxy"
+    endpoint_domain: Literal["unspecified","target_engagement","expression","biodistribution","ventricular_function","fibrosis","cell_cycle_entry","cytokinesis","cardiomyocyte_number","arrhythmia","toxicity","vascular_graft"] = "unspecified"
     endpoint_tier: Literal[
         "electrical",
         "acute_mechanical",
@@ -205,6 +219,14 @@ class InterventionOutcome(ContractModel):
     def require_value_or_artifact(self) -> InterventionOutcome:
         if self.value is None and self.artifact_ref is None:
             raise ValueError("Outcome requires a scalar value or artifact reference")
+        endpoint=self.endpoint.casefold().replace("-", "_").replace(" ", "_")
+        if "ejection_fraction" in endpoint or endpoint in {"lvef","lvef_change"}:
+            if self.endpoint_domain not in {"ventricular_function","unspecified"}:
+                raise ValueError("LVEF is a ventricular-function endpoint, not cardiomyocyte generation or clinical benefit")
+        if endpoint in {"new_myocardium","new_cardiomyocytes","cardiomyocyte_generation"} and self.endpoint_domain not in {"cardiomyocyte_number","cytokinesis"}:
+            raise ValueError("new myocardium claims require direct cell-generation endpoint domain")
+        if self.endpoint_scope=="model_proxy" and endpoint in {"clinical_benefit","patient_benefit","new_myocardium"}:
+            raise ValueError("model-proxy outcomes cannot be labelled clinical benefit or new myocardium")
         return self
 
 
