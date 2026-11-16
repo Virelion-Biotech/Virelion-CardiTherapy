@@ -1,25 +1,33 @@
 import pytest
 from pydantic import ValidationError
+
 from carditherapy import (
-    ArtifactRef, CardiTherapyService, Intervention, InterventionOutcome,
-    InterventionPlan, InterventionArm, InterventionRunRequest, RegenerativeInterventionSpec,
+    ArtifactRef,
+    CardiTherapyService,
+    Intervention,
+    InterventionArm,
+    InterventionOutcome,
+    InterventionPlan,
+    InterventionRunRequest,
+    RegenerativeInterventionSpec,
 )
 from carditherapy.backends import BackendUnavailable
 
 def base_spec(**kw):
-    value=dict(
-      modality="modified_mrna",intervention_domain="myocardial_regeneration",
-      target="MYC/CCNT1",mechanism="transient expression perturbation",
-      dose=1.0,dose_unit="ug",route="intramyocardial",
-      source_maturity="preclinical",source_record_ids=["paper-1"],
-      source_provenance=[{"source_identifier":"DOI:10.1000/x","source_type":"peer_reviewed","source_url":"https://example.org/x","source_sha256":"a"*64}],
-      comparator_definition={"type":"matched_control","description":"vehicle control"},
-      uncertainty_reference={"status":"not_characterized","reason":"no calibrated uncertainty available"},
-      calibration_status="none",calibration_evidence=[],model_supported_endpoints=[],
-      model_limitations=["No validated regenerative backend; no clinical efficacy inference"],
-      payload="synthetic mRNA payload description",expression_window="transient, measured in source",tissue_targeting="local injection"
-    )
-    value.update(kw); return value
+    value = {
+      "modality":"modified_mrna","intervention_domain":"myocardial_regeneration",
+      "target":"MYC/CCNT1","mechanism":"transient expression perturbation",
+      "dose":1.0,"dose_unit":"ug","route":"intramyocardial",
+      "source_maturity":"preclinical","source_record_ids":["paper-1"],
+      "source_provenance":[{"source_identifier":"DOI:10.1000/x","source_type":"peer_reviewed","source_url":"https://example.org/x","source_sha256":"a"*64}],
+      "comparator_definition":{"type":"matched_control","description":"vehicle control"},
+      "uncertainty_reference":{"status":"not_characterized","reason":"no calibrated uncertainty available"},
+      "calibration_status":"none","calibration_evidence":[],"model_supported_endpoints":[],
+      "model_limitations":["No validated regenerative backend; no clinical efficacy inference"],
+      "payload":"synthetic mRNA payload description","expression_window":"transient, measured in source","tissue_targeting":"local injection"
+    }
+    value.update(kw)
+    return value
 
 def test_modified_mrna_contract_is_valid_and_non_executable():
     spec=RegenerativeInterventionSpec(**base_spec())
