@@ -42,21 +42,52 @@ class ArtifactRef(ContractModel):
 class RegenerativeInterventionSpec(ContractModel):
     """Evidence- and calibration-gated description of a non-executable intervention."""
     model_config = ConfigDict(extra="forbid")
-    modality: Literal["aav_gene_delivery","circular_rna","modified_mrna","rna_interference","cell_derived_product","vascular_tissue_engineered_graft"]
-    intervention_domain: Literal["myocardial_regeneration","genetic_disease_modification","cell_derived_repair","vascular_surgical"]
+    modality: Literal[
+        "aav_gene_delivery",
+        "circular_rna",
+        "modified_mrna",
+        "rna_interference",
+        "cell_derived_product",
+        "vascular_tissue_engineered_graft",
+    ]
+    intervention_domain: Literal[
+        "myocardial_regeneration",
+        "genetic_disease_modification",
+        "cell_derived_repair",
+        "vascular_surgical",
+    ]
     target: str
     mechanism: str
     dose: float = Field(gt=0)
     dose_unit: str
     route: str
-    source_maturity: Literal["preclinical","clinical","regulatory","company_reported","unknown"]
+    source_maturity: Literal[
+        "preclinical", "clinical", "regulatory", "company_reported", "unknown"
+    ]
     source_record_ids: list[str] = Field(min_length=1)
     source_provenance: list[dict[str, Any]] = Field(min_length=1)
     comparator_definition: dict[str, Any]
     uncertainty_reference: dict[str, Any]
-    calibration_status: Literal["none","model_proxy_calibrated","empirically_calibrated"] = "none"
+    calibration_status: Literal[
+        "none", "model_proxy_calibrated", "empirically_calibrated"
+    ] = "none"
     calibration_evidence: list[dict[str, Any]] = Field(default_factory=list)
-    model_supported_endpoints: list[Literal["target_engagement","expression","biodistribution","ventricular_function","fibrosis","cardiomyocyte_proliferation","cytokinesis","cardiomyocyte_number","arrhythmia","toxicity","graft_patency","graft_outcomes"]] = Field(default_factory=list)
+    model_supported_endpoints: list[
+        Literal[
+            "target_engagement",
+            "expression",
+            "biodistribution",
+            "ventricular_function",
+            "fibrosis",
+            "cardiomyocyte_proliferation",
+            "cytokinesis",
+            "cardiomyocyte_number",
+            "arrhythmia",
+            "toxicity",
+            "graft_patency",
+            "graft_outcomes",
+        ]
+    ] = Field(default_factory=list)
     model_limitations: list[str] = Field(min_length=1)
     capsid: str | None = None
     promoter: str | None = None
@@ -120,7 +151,9 @@ class RegenerativeInterventionSpec(ContractModel):
             self.modality != "vascular_tissue_engineered_graft"
             and self.intervention_domain == "vascular_surgical"
         ):
-            raise ValueError("vascular_surgical domain is reserved for vascular graft interventions")
+            raise ValueError(
+                "vascular_surgical domain is reserved for vascular graft interventions"
+            )
         if not self.comparator_definition:
             raise ValueError("comparator_definition is required")
         if not self.uncertainty_reference:
@@ -168,9 +201,19 @@ class Intervention(ContractModel):
             raise ValueError("regenerative/surgical interventions require regenerative_spec")
         if self.kind not in {"regenerative", "surgical"} and self.regenerative_spec is not None:
             raise ValueError("regenerative_spec is only valid for regenerative/surgical interventions")
-        if self.regenerative_spec is not None and self.kind == "surgical" and self.regenerative_spec.modality != "vascular_tissue_engineered_graft":
-            raise ValueError("surgical regenerative spec currently supports vascular graft class only")
-        if self.regenerative_spec is not None and self.kind == "regenerative" and self.regenerative_spec.modality == "vascular_tissue_engineered_graft":
+        if (
+            self.regenerative_spec is not None
+            and self.kind == "surgical"
+            and self.regenerative_spec.modality != "vascular_tissue_engineered_graft"
+        ):
+            raise ValueError(
+                "surgical regenerative spec currently supports vascular graft class only"
+            )
+        if (
+            self.regenerative_spec is not None
+            and self.kind == "regenerative"
+            and self.regenerative_spec.modality == "vascular_tissue_engineered_graft"
+        ):
             raise ValueError("vascular grafts must use kind=surgical and vascular_surgical domain")
         return self
 
@@ -224,7 +267,20 @@ class InterventionOutcome(ContractModel):
     arm_id: str
     endpoint: str
     endpoint_scope: Literal["model_proxy", "patient_outcome"] = "model_proxy"
-    endpoint_domain: Literal["unspecified","target_engagement","expression","biodistribution","ventricular_function","fibrosis","cell_cycle_entry","cytokinesis","cardiomyocyte_number","arrhythmia","toxicity","vascular_graft"] = "unspecified"
+    endpoint_domain: Literal[
+        "unspecified",
+        "target_engagement",
+        "expression",
+        "biodistribution",
+        "ventricular_function",
+        "fibrosis",
+        "cell_cycle_entry",
+        "cytokinesis",
+        "cardiomyocyte_number",
+        "arrhythmia",
+        "toxicity",
+        "vascular_graft",
+    ] = "unspecified"
     endpoint_tier: Literal[
         "electrical",
         "acute_mechanical",
