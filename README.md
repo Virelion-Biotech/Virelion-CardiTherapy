@@ -134,3 +134,8 @@ verification, not measured treatment-response validation.
 
 See [model contracts and equations](docs/INTERVENTION_MODELS.md) for assumptions,
 units, endpoint definitions and the empirical evidence still needed.
+
+
+## Regenerative and genetic intervention contracts v1
+
+CardiTherapy now provides evidence-gated specifications for AAV, circRNA, modified mRNA, RNA interference, cell-derived products/extracellular vesicles and vascular tissue-engineered grafts. These are descriptive contracts only: no regenerative or vascular execution backend is registered. Vascular grafts remain a separate surgical domain. Model endpoints require declared calibration evidence; LVEF, fibrosis, proliferation, cytokinesis, cell number, arrhythmia and toxicity remain distinct endpoint domains. A model-proxy LVEF change cannot be reported as new myocardium or clinical benefit. See [regenerative intervention contracts](docs/REGENERATIVE_INTERVENTION_CONTRACTS.md).
