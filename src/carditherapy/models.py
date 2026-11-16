@@ -79,30 +79,66 @@ class RegenerativeInterventionSpec(ContractModel):
     @model_validator(mode="after")
     def validate_modality_contract(self):
         required = {
-            "aav_gene_delivery": ("capsid","promoter","payload","biodistribution","immunogenicity"),
-            "circular_rna": ("payload","expression_window","tissue_targeting"),
-            "modified_mrna": ("payload","expression_window","tissue_targeting"),
-            "rna_interference": ("target_transcript_or_protein","chemistry","pharmacodynamic_readouts"),
-            "cell_derived_product": ("cell_source","product_identity","manufacturing","potency","proposed_mechanism"),
-            "vascular_tissue_engineered_graft": ("graft_material","product_identity","manufacturing","potency","patency_outcomes"),
+            "aav_gene_delivery": (
+                "capsid",
+                "promoter",
+                "payload",
+                "biodistribution",
+                "immunogenicity",
+            ),
+            "circular_rna": ("payload", "expression_window", "tissue_targeting"),
+            "modified_mrna": ("payload", "expression_window", "tissue_targeting"),
+            "rna_interference": (
+                "target_transcript_or_protein",
+                "chemistry",
+                "pharmacodynamic_readouts",
+            ),
+            "cell_derived_product": (
+                "cell_source",
+                "product_identity",
+                "manufacturing",
+                "potency",
+                "proposed_mechanism",
+            ),
+            "vascular_tissue_engineered_graft": (
+                "graft_material",
+                "product_identity",
+                "manufacturing",
+                "potency",
+                "patency_outcomes",
+            ),
         }[self.modality]
-        missing=[name for name in required if not getattr(self,name)]
-        if missing: raise ValueError(f"{self.modality} requires: {', '.join(missing)}")
-        if self.modality=="vascular_tissue_engineered_graft" and self.intervention_domain!="vascular_surgical":
+        missing = [name for name in required if not getattr(self, name)]
+        if missing:
+            raise ValueError(f"{self.modality} requires: {', '.join(missing)}")
+        if (
+            self.modality == "vascular_tissue_engineered_graft"
+            and self.intervention_domain != "vascular_surgical"
+        ):
             raise ValueError("vascular grafts must remain in the separate vascular_surgical domain")
-        if self.modality!="vascular_tissue_engineered_graft" and self.intervention_domain=="vascular_surgical":
+        if (
+            self.modality != "vascular_tissue_engineered_graft"
+            and self.intervention_domain == "vascular_surgical"
+        ):
             raise ValueError("vascular_surgical domain is reserved for vascular graft interventions")
-        if not self.comparator_definition: raise ValueError("comparator_definition is required")
-        if not self.uncertainty_reference: raise ValueError("uncertainty_reference is required")
-        if any(not str(x).strip() for x in self.model_limitations): raise ValueError("model_limitations must not contain blanks")
-        for i, source in enumerate(self.source_provenance):
-            for key in ("source_identifier","source_type","source_url","source_sha256"):
-                if not isinstance(source.get(key),str) or not source[key].strip(): raise ValueError(f"source_provenance[{i}].{key} is required")
-            digest=source["source_sha256"]
-            if len(digest)!=64 or any(ch not in string.hexdigits for ch in digest): raise ValueError(f"source_provenance[{i}].source_sha256 must be SHA-256")
-        if self.model_supported_endpoints and (self.calibration_status=="none" or not self.calibration_evidence):
+        if not self.comparator_definition:
+            raise ValueError("comparator_definition is required")
+        if not self.uncertainty_reference:
+            raise ValueError("uncertainty_reference is required")
+        if any(not str(item).strip() for item in self.model_limitations):
+            raise ValueError("model_limitations must not contain blanks")
+        for index, source in enumerate(self.source_provenance):
+            for key in ("source_identifier", "source_type", "source_url", "source_sha256"):
+                if not isinstance(source.get(key), str) or not source[key].strip():
+                    raise ValueError(f"source_provenance[{index}].{key} is required")
+            digest = source["source_sha256"]
+            if len(digest) != 64 or any(ch not in string.hexdigits for ch in digest):
+                raise ValueError(f"source_provenance[{index}].source_sha256 must be SHA-256")
+        if self.model_supported_endpoints and (
+            self.calibration_status == "none" or not self.calibration_evidence
+        ):
             raise ValueError("model endpoints require declared calibration evidence")
-        if self.calibration_status=="empirically_calibrated" and not self.calibration_evidence:
+        if self.calibration_status == "empirically_calibrated" and not self.calibration_evidence:
             raise ValueError("empirical calibration status requires calibration_evidence")
         return self
 
@@ -218,13 +254,29 @@ class InterventionOutcome(ContractModel):
     def require_value_or_artifact(self) -> InterventionOutcome:
         if self.value is None and self.artifact_ref is None:
             raise ValueError("Outcome requires a scalar value or artifact reference")
-        endpoint=self.endpoint.casefold().replace("-", "_").replace(" ", "_")
-        if ("ejection_fraction" in endpoint or endpoint in {"lvef","lvef_change"}) and self.endpoint_domain not in {"ventricular_function","unspecified"}:
-            raise ValueError("LVEF is a ventricular-function endpoint, not cardiomyocyte generation or clinical benefit")
-        if endpoint in {"new_myocardium","new_cardiomyocytes","cardiomyocyte_generation"} and self.endpoint_domain not in {"cardiomyocyte_number","cytokinesis"}:
+        endpoint = self.endpoint.casefold().replace("-", "_").replace(" ", "_")
+        if (
+            "ejection_fraction" in endpoint or endpoint in {"lvef", "lvef_change"}
+        ) and self.endpoint_domain not in {"ventricular_function", "unspecified"}:
+            raise ValueError(
+                "LVEF is a ventricular-function endpoint, not cardiomyocyte generation or clinical benefit"
+            )
+        if endpoint in {
+            "new_myocardium",
+            "new_cardiomyocytes",
+            "cardiomyocyte_generation",
+        } and self.endpoint_domain not in {"cardiomyocyte_number", "cytokinesis"}:
             raise ValueError("new myocardium claims require direct cell-generation endpoint domain")
-        if self.endpoint_scope=="model_proxy" and endpoint in {"clinical_benefit","patient_benefit","new_myocardium","new_cardiomyocytes","cardiomyocyte_generation"}:
-            raise ValueError("model-proxy outcomes cannot be labelled clinical benefit or new myocardium")
+        if self.endpoint_scope == "model_proxy" and endpoint in {
+            "clinical_benefit",
+            "patient_benefit",
+            "new_myocardium",
+            "new_cardiomyocytes",
+            "cardiomyocyte_generation",
+        }:
+            raise ValueError(
+                "model-proxy outcomes cannot be labelled clinical benefit or new myocardium"
+            )
         return self
 
 
