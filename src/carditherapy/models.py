@@ -225,7 +225,7 @@ class InterventionOutcome(ContractModel):
                 raise ValueError("LVEF is a ventricular-function endpoint, not cardiomyocyte generation or clinical benefit")
         if endpoint in {"new_myocardium","new_cardiomyocytes","cardiomyocyte_generation"} and self.endpoint_domain not in {"cardiomyocyte_number","cytokinesis"}:
             raise ValueError("new myocardium claims require direct cell-generation endpoint domain")
-        if self.endpoint_scope=="model_proxy" and endpoint in {"clinical_benefit","patient_benefit","new_myocardium"}:
+        if self.endpoint_scope=="model_proxy" and endpoint in {"clinical_benefit","patient_benefit","new_myocardium","new_cardiomyocytes","cardiomyocyte_generation"}:
             raise ValueError("model-proxy outcomes cannot be labelled clinical benefit or new myocardium")
         return self
 
