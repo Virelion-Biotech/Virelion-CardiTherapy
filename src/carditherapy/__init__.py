@@ -9,6 +9,7 @@ from .models import (
     InterventionPlan,
     InterventionRunRequest,
     InterventionRunResult,
+    RegenerativeInterventionSpec,
 )
 from .pacing_backend import PACING_BACKEND_NAME, CardiEPPacingBackend
 from .pharmacology_backend import PharmacologyBackend
@@ -28,6 +29,7 @@ __all__ = [
     "InterventionRunResult",
     "PharmacologyBackend",
     "ReadinessError",
+    "RegenerativeInterventionSpec",
 ]
 
 __version__ = "0.3.0"

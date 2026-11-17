@@ -1,0 +1,27 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "$id":"https://virelionbiotech.org/schemas/regenerative-intervention.v1.schema.json",
+ "title":"CardiTherapy regenerative and vascular intervention specification",
+ "type":"object",
+ "required":["modality","intervention_domain","target","mechanism","dose","dose_unit","route","source_maturity","source_record_ids","source_provenance","comparator_definition","uncertainty_reference","calibration_status","calibration_evidence","model_supported_endpoints","model_limitations"],
+ "properties":{
+  "modality":{"enum":["aav_gene_delivery","circular_rna","modified_mrna","rna_interference","cell_derived_product","vascular_tissue_engineered_graft"]},
+  "intervention_domain":{"enum":["myocardial_regeneration","genetic_disease_modification","cell_derived_repair","vascular_surgical"]},
+  "target":{"type":"string","minLength":1},"mechanism":{"type":"string","minLength":1},
+  "dose":{"type":"number","exclusiveMinimum":0},"dose_unit":{"type":"string","minLength":1},"route":{"type":"string","minLength":1},
+  "source_maturity":{"enum":["preclinical","clinical","regulatory","company_reported","unknown"]},
+  "source_record_ids":{"type":"array","minItems":1,"items":{"type":"string"}},
+  "source_provenance":{"type":"array","minItems":1,"items":{"type":"object","required":["source_identifier","source_type","source_url","source_sha256"]}},
+  "comparator_definition":{"type":"object","minProperties":1},"uncertainty_reference":{"type":"object","minProperties":1},
+  "calibration_status":{"enum":["none","model_proxy_calibrated","empirically_calibrated"]},
+  "calibration_evidence":{"type":"array"},"model_supported_endpoints":{"type":"array","items":{"enum":["target_engagement","expression","biodistribution","ventricular_function","fibrosis","cardiomyocyte_proliferation","cytokinesis","cardiomyocyte_number","arrhythmia","toxicity","graft_patency","graft_outcomes"]}},
+  "model_limitations":{"type":"array","minItems":1,"items":{"type":"string"}},
+  "capsid":{"type":["string","null"]},"promoter":{"type":["string","null"]},"payload":{"type":["string","null"]},
+  "biodistribution":{"type":["object","null"]},"immunogenicity":{"type":["object","null"]},
+  "expression_window":{"type":["string","null"]},"tissue_targeting":{"type":["string","null"]},
+  "target_transcript_or_protein":{"type":["string","null"]},"chemistry":{"type":["string","null"]},"pharmacodynamic_readouts":{"type":"array"},
+  "cell_source":{"type":["string","null"]},"product_identity":{"type":["string","null"]},"manufacturing":{"type":["object","null"]},"potency":{"type":["object","null"]},"proposed_mechanism":{"type":["string","null"]},
+  "graft_material":{"type":["string","null"]},"patency_outcomes":{"type":"array"}
+ },
+ "additionalProperties":false
+}
